@@ -5,3 +5,4 @@
 /omejdn_priv.*
 /.bundle
 /vendor
+node_modules/
