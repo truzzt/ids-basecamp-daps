@@ -8,7 +8,6 @@ on:
 
 jobs:
   release:
-    name: Release
     runs-on: ubuntu-latest
     outputs:
       new_tag_version: ${{ steps.tag_version.outputs.new_tag_version }}
@@ -34,7 +33,6 @@ jobs:
         run: npx semantic-release
 
   publish:
-    name: Publish
     needs: release
     if: ${{ needs.release.outputs.new_tag_version != '' }}
     runs-on: ubuntu-latest
