@@ -1,14 +1,9 @@
 name: Test, Build and Release
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - master
-    tags:
-      - v*.**
-  pull_request:
-    types: [opened, synchronize, reopened]
 
 jobs:
   docker-build:
