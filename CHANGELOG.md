@@ -1,3 +1,10 @@
+# [1.0.0-alpha.3](https://github.com/truzzt/ids-basecamp-daps/compare/v1.0.0-alpha.2...v1.0.0-alpha.3) (2023-10-05)
+
+
+### Bug Fixes
+
+* **ci:** read correct version from semantic-release ([94b8704](https://github.com/truzzt/ids-basecamp-daps/commit/94b8704714a9559c9edc6223478fdb937f1cc0d6))
+
 # [1.0.0-alpha.2](https://github.com/truzzt/ids-basecamp-daps/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2023-10-05)
 
 
