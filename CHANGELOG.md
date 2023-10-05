@@ -1,3 +1,10 @@
+# [1.0.0-alpha.2](https://github.com/truzzt/ids-basecamp-daps/compare/v1.0.0-alpha.1...v1.0.0-alpha.2) (2023-10-05)
+
+
+### Bug Fixes
+
+* **ci:** add GITHUB_TOKEN to dry run ([bc362c0](https://github.com/truzzt/ids-basecamp-daps/commit/bc362c0fd3001b158aa4c0175c3c0bb056f62f13))
+
 # 1.0.0-alpha.1 (2023-10-05)
 
 
