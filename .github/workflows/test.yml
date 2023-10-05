@@ -19,7 +19,7 @@ jobs:
         bundler-cache: false # runs 'bundle install' and caches installed gems automatically
     - name: Rubocop lint
       run: |
-        sudo gem install --no-document rubocop
+        sudo gem install --no-document rubocop -v 1.50.2
         rubocop
     - name: Unit tests
       run: |
