@@ -11,30 +11,6 @@ on:
     types: [opened, synchronize, reopened]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@master
-    - uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.0' # Not needed with a .ruby-version file
-        bundler-cache: false # runs 'bundle install' and caches installed gems automatically
-    - name: Rubocop lint
-      run: |
-        sudo gem install --no-document rubocop
-        rubocop
-    - name: Unit tests
-      run: |
-        gem install --no-document -g
-        scripts/test_all.sh
-    - name: SBOM generation
-      run: |
-        gem install --no-document cyclonedx-ruby
-        cyclonedx-ruby -p .
-    - uses: actions/upload-artifact@v2
-      with:
-        name: SBOM
-        path: bom.xml
   docker-build:
     needs: test
     runs-on: ubuntu-latest
@@ -59,27 +35,27 @@ jobs:
           echo "Building as ${VERSION}"
         fi
         echo "##[set-output name=version;]$VERSION"
-        docker build --build-arg omejdn_version=$VERSION -t ghcr.io/fraunhofer-aisec/omejdn-server:dev .
+        docker build --build-arg omejdn_version=$VERSION -t ghcr.io/truzzt/ids-basecamp-daps:dev .
       id: build_docker
     - name: Push Docker Image
       run: |
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-        docker push ghcr.io/fraunhofer-aisec/omejdn-server:dev
+        docker push ghcr.io/truzzt/ids-basecamp-daps:dev
       if: github.ref == 'refs/heads/master'
     - name: Push branch docker image
       run: |
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
         git_branch=${GITHUB_REF#refs/heads/}
-        docker tag ghcr.io/fraunhofer-aisec/omejdn-server:dev ghcr.io/fraunhofer-aisec/omejdn-server:$git_branch
-        docker push ghcr.io/fraunhofer-aisec/omejdn-server:$git_branch
+        docker tag ghcr.io/truzzt/ids-basecamp-daps:dev ghcr.io/truzzt/ids-basecamp-daps:$git_branch
+        docker push ghcr.io/truzzt/ids-basecamp-daps:$git_branch
       if: (github.ref != 'refs/heads/master') && startsWith(github.ref, 'refs/heads')
     - name: Push release docker image
       run: |
         echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-        docker tag ghcr.io/fraunhofer-aisec/omejdn-server:dev ghcr.io/fraunhofer-aisec/omejdn-server:${{ steps.build_docker.outputs.version }}
-        docker tag ghcr.io/fraunhofer-aisec/omejdn-server:dev ghcr.io/fraunhofer-aisec/omejdn-server:latest
-        docker push ghcr.io/fraunhofer-aisec/omejdn-server:${{ steps.build_docker.outputs.version }}
-        docker push ghcr.io/fraunhofer-aisec/omejdn-server:latest
+        docker tag ghcr.io/truzzt/ids-basecamp-daps:dev ghcr.io/truzzt/ids-basecamp-daps:${{ steps.build_docker.outputs.version }}
+        docker tag ghcr.io/truzzt/ids-basecamp-daps:dev ghcr.io/truzzt/ids-basecamp-daps:latest
+        docker push ghcr.io/truzzt/ids-basecamp-daps:${{ steps.build_docker.outputs.version }}
+        docker push ghcr.io/truzzt/ids-basecamp-daps:latest
       if: startsWith(github.ref, 'refs/tags/v')
     - name: "Create Release"
       if: startsWith(github.ref, 'refs/tags/v')

@@ -1,0 +1,38 @@
+name: Test
+
+on:
+  pull_request:
+    branches:
+      - master
+      - beta
+      - alpha
+      - development
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.0' # Not needed with a .ruby-version file
+        bundler-cache: false # runs 'bundle install' and caches installed gems automatically
+    - name: Rubocop lint
+      run: |
+        sudo gem install --no-document rubocop
+        rubocop
+    - name: Unit tests
+      run: |
+        gem install --no-document -g
+        scripts/test_all.sh
+    - name: SBOM generation
+      run: |
+        gem install --no-document cyclonedx-ruby
+        cyclonedx-ruby -p .
+    - uses: actions/upload-artifact@v2
+      with:
+        name: SBOM
+        path: bom.xml
+
+
+
