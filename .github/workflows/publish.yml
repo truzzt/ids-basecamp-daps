@@ -1,0 +1,26 @@
+name: publish
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Login to GitHub Container Registry
+      run: echo ${{ secrets.GITHUB_TOKEN }} | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+
+    - name: Build Docker image
+      env:
+        DOCKER_IMAGE_TAG: latest
+      run: docker build -t ghcr.io/truzzt/ids-basecamp-daps:$DOCKER_IMAGE_TAG .
+
+    - name: Push Docker image
+      env:
+        DOCKER_IMAGE_TAG: latest
+      run: docker push ghcr.io/truzzt/ids-basecamp-daps:$DOCKER_IMAGE_TAG
