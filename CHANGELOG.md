@@ -1,3 +1,10 @@
+# [1.0.0-alpha.6](https://github.com/truzzt/ids-basecamp-daps/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2023-11-14)
+
+
+### Bug Fixes
+
+* charts_dir value ([191f243](https://github.com/truzzt/ids-basecamp-daps/commit/191f243b2bbd32cbd608a7dd7e002e7590c57c89))
+
 # [1.0.0-alpha.5](https://github.com/truzzt/ids-basecamp-daps/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2023-11-14)
 
 
