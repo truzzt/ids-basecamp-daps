@@ -1,3 +1,10 @@
+# [1.0.0-alpha.5](https://github.com/truzzt/ids-basecamp-daps/compare/v1.0.0-alpha.4...v1.0.0-alpha.5) (2023-11-14)
+
+
+### Bug Fixes
+
+* **ci:** add charts_dir to helm publish action ([cd55e65](https://github.com/truzzt/ids-basecamp-daps/commit/cd55e6596540cf490f7245bf1ef9d8c1c204d379))
+
 # [1.0.0-alpha.4](https://github.com/truzzt/ids-basecamp-daps/compare/v1.0.0-alpha.3...v1.0.0-alpha.4) (2023-11-14)
 
 
