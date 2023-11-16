@@ -1,3 +1,15 @@
+# [1.0.0-alpha.7](https://github.com/truzzt/ids-basecamp-daps/compare/v1.0.0-alpha.6...v1.0.0-alpha.7) (2023-11-16)
+
+
+### Bug Fixes
+
+* add generated version to docker build as arg ([b75664f](https://github.com/truzzt/ids-basecamp-daps/commit/b75664f4fd987b1477824e6930621de9fbbb467b))
+
+
+### Features
+
+* add start script to create static config files ([cc8371d](https://github.com/truzzt/ids-basecamp-daps/commit/cc8371d91c5519d047e0e02e75481ee1e250f45f))
+
 # [1.0.0-alpha.6](https://github.com/truzzt/ids-basecamp-daps/compare/v1.0.0-alpha.5...v1.0.0-alpha.6) (2023-11-14)
 
 
