@@ -13,4 +13,4 @@ COPY . .
 
 EXPOSE 4567
 
-CMD [ "ruby", "omejdn.rb" ]
+CMD [ "./start.sh" ]
