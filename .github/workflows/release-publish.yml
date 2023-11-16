@@ -48,45 +48,9 @@ jobs:
       - name: Build Docker image
         env:
           DOCKER_IMAGE_TAG: ${{ needs.release.outputs.new_tag_version }}
-        run: docker build -t ghcr.io/truzzt/ids-basecamp-daps:$DOCKER_IMAGE_TAG .
+        run: docker build --build-arg="omejdn_version=${{ needs.release.outputs.new_tag_version }}" -t ghcr.io/truzzt/ids-basecamp-daps:$DOCKER_IMAGE_TAG .
 
       - name: Push Docker image
         env:
           DOCKER_IMAGE_TAG: ${{ needs.release.outputs.new_tag_version }}
         run: docker push ghcr.io/truzzt/ids-basecamp-daps:$DOCKER_IMAGE_TAG
-
-  helm:
-    needs: release
-    if: ${{ needs.release.outputs.new_tag_version != '' }}
-    # depending on default permission settings for your org (contents being read-only or read-write for workloads), you will have to add permissions
-    # see: https://docs.github.com/en/actions/security-guides/automatic-token-authentication#modifying-the-permissions-for-the-github_token
-    permissions:
-      contents: write
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - name: Update values.yaml
-        uses: fjogeleit/yaml-update-action@main
-        with:
-          valueFile: 'helm-chart/Chart.yaml'
-          propertyPath: 'file.version'
-          value: ${{ needs.release.outputs.new_tag_version }}
-          commitChange: true
-
-      - name: Configure Git
-        run: |
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
-
-      - name: Install Helm
-        uses: azure/setup-helm@v3
-
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.6.0
-        with:
-          charts_dir: ./helm-chart
-        env:
-          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
