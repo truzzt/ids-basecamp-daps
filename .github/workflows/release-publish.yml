@@ -48,7 +48,7 @@ jobs:
       - name: Build Docker image
         env:
           DOCKER_IMAGE_TAG: ${{ needs.release.outputs.new_tag_version }}
-        run: docker build -t ghcr.io/truzzt/ids-basecamp-daps:$DOCKER_IMAGE_TAG .
+        run: docker build --build-arg="omejdn_version=${{ needs.release.outputs.new_tag_version }}" -t ghcr.io/truzzt/ids-basecamp-daps:$DOCKER_IMAGE_TAG .
 
       - name: Push Docker image
         env:
